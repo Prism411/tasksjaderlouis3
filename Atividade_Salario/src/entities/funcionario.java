@@ -11,7 +11,7 @@ public class funcionario {
 	this.name = name;
 	this.salario = salario;
 	this.setId(id);
-}
+} /// teste123
 	public String getName() {
 		return name;
 	}
