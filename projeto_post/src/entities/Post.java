@@ -1,5 +1,6 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
@@ -7,23 +8,23 @@ import java.util.Date;
 import java.util.List;
 
 public class Post {
-	private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-	TemporalAccessor moment;
+	private static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	Date moment;
 	String titulo;
 	String counteudo;
 	Integer likes;
 	List<comment>comentarios = new ArrayList<>();
 
-	public Post(TemporalAccessor moment, String titulo, String counteudo, int likes) {
+	public Post(Date moment, String titulo, String counteudo, int likes) {
 		this.moment = moment;
 		this.titulo = titulo;
 		this.counteudo = counteudo;
 		this.likes = likes;
 	}
-	public TemporalAccessor getMoment() {
+	public Date getMoment() {
 		return moment;
 	}
-	public void setMoment(TemporalAccessor moment) {
+	public void setMoment(Date moment) {
 		this.moment = moment;
 	}
 	public String getTitulo() {
