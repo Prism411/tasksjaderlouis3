@@ -30,9 +30,12 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public double Totalprice() {
+		return price * quantity;
+	}
 	
 	public String toString() {
-		return "Product [name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
+		return "Product [name=" + name + ", quantity=" + quantity + "Total Value=" + Totalprice() + "]";
 	}
 
 
