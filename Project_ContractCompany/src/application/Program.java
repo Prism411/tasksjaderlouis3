@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.text.Format;
 import java.time.Clock;
 import java.time.Instant;
@@ -12,37 +13,38 @@ import java.util.Scanner;
 
 import entities.Contract;
 import services.ServicesPayment;
+import services.ServicesWriter;
 
 public class Program {
 
-	public static void main(String[] args) throws NullPointerException {
+	public static void main(String[] args) {
 		
-	 Locale.setDefault(Locale.US);
-	 Scanner sc = new Scanner(System.in);
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
 
 		try {
-	 System.out.print("Quantos Contratos deseja acrescentar?");
-	 int n = sc.nextInt();
-	 for (int i = 0; i<n; i++) {
-		 System.out.print("Em quantos meses deseja terminar de pagar este contrato?");
-		 int mes = sc.nextInt();
-		 System.out.println("Numero do contrato: ");
-		 int number = sc.nextInt();
-		 System.out.print("Preço do contrato: ");
-		 double price = sc.nextDouble();
-		 Contract c = new Contract(mes,number,price);
-		 System.out.println(c);
-		 
-	 }
-
-	 } catch (NullPointerException e) {
-		 System.out.println("VALOR NULO!!");
-		 e.printStackTrace();
-
-	 }catch (InputMismatchException e) {
-		 System.out.println("Digite um numero!");
-	
-	 }
-	}
-	}
+			
+			System.out.print("Quantos Contratos deseja acrescentar?");
+			int n = sc.nextInt();
+			for (int i = 0; i<n; i++) {
+				System.out.print("Em quantos meses deseja terminar de pagar este contrato?");
+				int mes = sc.nextInt();
+				System.out.println("Numero do contrato: ");
+				int number = sc.nextInt();
+				System.out.print("Preço do contrato: ");
+				double price = sc.nextDouble();
+				Contract c = new Contract(mes,number,price);
+				System.out.println(c.toString());
+				c.ContractSaver();
+			}
+		} catch (IOException e) {
+			System.out.println("IOEXCEPTION ERROR!!!!!");
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println("VALOR NULO!!");
+			e.printStackTrace();
+		} catch (InputMismatchException e) {
+			System.out.println("Digite um numero!");
+		}
+	}} 
 
