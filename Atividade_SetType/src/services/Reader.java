@@ -3,71 +3,57 @@ package services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import entities.User;
+import services.Reader;
 
 public class Reader {
 	
-	private String Username;
-	private String Date;
 	
 	public Reader() {
+	
+	}
+	
+	protected String Path = "C:\\\\temp\\\\in.txt";
+	public String getPath() {
+		return Path;
+	}
+	public void setPath(String path) {
+		Path = path;
+	}
+	public Reader(String path) {
+		super();
+		Path = path;
+	}
+	public String Reading() throws IOException {
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(Path))) {
+			Set<User> set = new HashSet<>();
+			String line = br.readLine();
+			while (line != null) {
+			  String[] fields = line.split(" ");
+			  String username = fields[0];
+			  String date = fields[1];
+			  User user = new User(username, date);
+			  set.add(new User(username, date));
+			  line = br.readLine();
+			}
+			return "o total eh " + set.size();
+			
 		
 	}
 	
-	public Reader(String username, String date) {
-		Username = username;
-		Date = date;
-	}
-	public String getUsername() {
-		return Username;
-	}
 
-	public void setUsername(String username) {
-		Username = username;
-	}
 
-	public String getDate() {
-		return Date;
-	}
 
-	public void setDate(String date) {
-		Date = date;
-	}
 
-	public String StringReader() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader("C:\\temp\\in.txt"));
-		String Line = br.readLine();
 
-		
-		while (Line != null) {
-			Line = br.readLine();
-			String[] fields = Line.split(" ");
-			System.out.println(fields[0]);
-			return Line;
-		}
-		return Line;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(Username);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Reader other = (Reader) obj;
-		return Objects.equals(Username, other.Username);
-	}
-	@Override
-	public String toString() {
-		return "Reader [Username=" + Username + ", Date=" + Date + "]";
-	}
+	}}
+
 	
 	
-
-}

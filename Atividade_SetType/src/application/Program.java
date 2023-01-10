@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import entities.User;
 import services.Reader;
 
 public class Program {
@@ -15,24 +16,9 @@ public class Program {
 	
 	public static void main(String[] args) throws IOException {
 		
-
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\temp\\in.txt"))) {
-			Set<Reader> set = new HashSet<>();
-			String line = br.readLine();
-			while (line != null) {
-			  String[] fields = line.split(" ");
-			  String username = fields[0];
-			  String date = fields[1];
-			  Reader reader = new Reader(username, date);
-			  set.add(new Reader(username, date));
-			  line = br.readLine();
-			}
-			System.out.println("Total Users:" + set.size()); 
-
-			for (Reader e: set) {
-				System.out.println(e);
-			}
+	Reader r = new Reader();
+	r.Reading();
+	System.out.println(r.Reading());
 			
 		}
-}
 }
