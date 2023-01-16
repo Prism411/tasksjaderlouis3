@@ -22,25 +22,19 @@ public class Program {
 		
 		try {
 			conn = ServerMain.getConnection();
-			stt = conn.prepareStatement(
-					"INSERT INTO seller "
-					+	"(Name, Email, BirthDate, BaseSalary, DepartmentId) "
-					+	"VALUES "
-					+	"(?, ?, ?, ?, ?)", + Statement.RETURN_GENERATED_KEYS); 
-			stt.setString(1, "Carlo Purple");
-			stt.setString(2, "carl@gmail.com");
-			stt.setDate(3, new java.sql.Date(sdf.parse("22/04/1996").getTime()));
-			stt.setDouble(4, 3000);
-			stt.setInt(5, 4);
+			stt = conn.prepareStatement(""
+					+ "UPDATE seller "
+					+ "SET BaseSalary = BaseSalary + ? "
+					+ "WHERE "
+					+ "(DepartmentId = ?)");
+
+			stt.setDouble(1, 200.00);
+			stt.setInt(2, 2);
+				
 			int rowsAffected = stt.executeUpdate();
 			
 			if (rowsAffected > 0) {
 				System.out.println("Rows Affected: " + rowsAffected);
-				rs = stt.getGeneratedKeys();
-				while (rs.next()) {
-					int id 	= rs.getInt(1);
-					System.out.println("Done! id = " + id);
-				}
 			} else {
 				System.out.println("No rows Affected!");
 			}
@@ -51,7 +45,7 @@ public class Program {
 				System.out.println(rs.getInt("id") +" , " +  rs.getString("Name"));
 			}
 		} 
-		catch (SQLException | ParseException e) {
+		catch (SQLException e) {
 			e.printStackTrace();
 			throw new ServerException("Errou!");
 		} finally {
