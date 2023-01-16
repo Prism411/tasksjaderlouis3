@@ -8,53 +8,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import server.ServerIntegrityException;
 
+@SuppressWarnings("unused")
 public class Program {
 
 	public static void main(String[] args) {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
 		Connection conn = null;
-		Statement st = null;
-		ResultSet rs = null;
-		PreparedStatement stt = null;
+		PreparedStatement st = null;
 		
 		try {
 			conn = ServerMain.getConnection();
-			stt = conn.prepareStatement(""
-					+ "UPDATE seller "
-					+ "SET BaseSalary = BaseSalary + ? "
+			st = conn.prepareStatement(""
+					+ "DELETE FROM seller "
 					+ "WHERE "
-					+ "(DepartmentId = ?)");
-
-			stt.setDouble(1, 200.00);
-			stt.setInt(2, 2);
-				
-			int rowsAffected = stt.executeUpdate();
+					+ "id = ?");
+				 st.setInt(1, 7);
+				 int RowsAffected = st.executeUpdate();
+				 
+				 if (RowsAffected > 0) {
+					 System.out.println("Rows Affected where: " + RowsAffected);
+				 } else {
+					 System.out.println("No rows where affected");
+				 }
 			
-			if (rowsAffected > 0) {
-				System.out.println("Rows Affected: " + rowsAffected);
-			} else {
-				System.out.println("No rows Affected!");
-			}
-		
-			st = conn.createStatement();
-			rs = st.executeQuery("select * from department");
-			while (rs.next()) {
-				System.out.println(rs.getInt("id") +" , " +  rs.getString("Name"));
-			}
-		} 
-		catch (SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
-			throw new ServerException("Errou!");
-		} finally {
-			ServerMain.CloseRS(rs);
+			throw new ServerException("Errou SQLEXCEPTION!");
+		}
+		finally {
 			ServerMain.CloseSt(st);
 			ServerMain.closeConnection();
 		}
-
-
+	
+	
+	
 	}
-
-}
+	}
