@@ -12,14 +12,12 @@ public class Application {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
+		
+		person p = em.find(person.class, 1);
+		System.out.println(p);
 
-		person p1 = new person(1,"carlos da silva", "carlos@gmail.com");
-
-		em.getTransaction().begin();
-		em.merge(p1); // use merge instead of persist
-		em.getTransaction().commit();
-
-		System.out.println("Person saved to the database: " + p1);
+		em.close();
+		emf.close();
 
 
 	}
