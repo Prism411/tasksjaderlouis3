@@ -24,8 +24,8 @@ public class VViewController {
 		Locale.setDefault(Locale.US);
 		double number1 = Double.parseDouble(txtNumber1.getText());
 		double number2 = Double.parseDouble(txtNumber2.getText());
-		double sum = number1 + number2 + 3232184320.5340;
-		labelResult.setText(String.format("%.2f", sum));
+		double sum = number1 + number2;
+		Alerts.showAlert("Resultado", null, String.format("%.2f", sum), AlertType.INFORMATION);
 		
 	}
 
