@@ -26,7 +26,7 @@ public class MainController implements Initializable {
 	@FXML
 	private Label value;
 	
-	private Counter count = new Counter(0);;
+	private Counter count = new Counter(23);;
 	
 
 	
